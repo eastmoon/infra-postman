@@ -1,0 +1,18 @@
+# Docker-Compose document
+# Ref : https://docs.docker.com/compose/compose-file/
+
+version: "3"
+services:
+  postman:
+    build: .
+    image: docker-postman:${TAG}
+    container_name: docker-postman_${TAG}
+    command:
+      run jsonplaceholder.postman_collection.json
+      -r html,cli
+      --reporter-html-export /reports/Restful_Booker_Test_Run.html
+      --reporter-html-template /templates/customTemplate.hbs
+    volumes:
+      - ../test:/etc/newman
+      - ../reports:/reports
+      - ../templates:/templates
