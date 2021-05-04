@@ -8,6 +8,32 @@
 	"item": [
 		{
 			"name": "GET Method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"GET Method Test\")\r",
+							"pm.test(\"GET Method is success\", () => {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"console.log(\"GET Method save collection variable from response\")\r",
+							"pm.collectionVariables.set(\"getVar\", pm.response.json()[0].id)\r",
+							"console.log(pm.collectionVariables.replaceIn(\"Save GET Method variable : {{getVar}}\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -30,9 +56,31 @@
 		},
 		{
 			"name": "POST Method",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"POST Method Pre-request Script\");\r",
+							"console.log(pm.collectionVariables.replaceIn(\"Retrieve GET Method variable : {{getVar}}\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json; charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title:\": \"foo\",\r\n    \"body\": \"bar\",\r\n    \"userId\": {{getVar}}\r\n}"
+				},
 				"url": {
 					"raw": "https://jsonplaceholder.typicode.com/posts",
 					"protocol": "https",
@@ -47,6 +95,12 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "getVar",
+			"value": ""
 		}
 	]
 }
