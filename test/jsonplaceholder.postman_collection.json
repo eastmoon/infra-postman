@@ -118,7 +118,7 @@
 		},
 		{
 			"key": "baseURL",
-			"value": ""
+			"value": "https://jsonplaceholder.typicode.com"
 		}
 	]
 }
