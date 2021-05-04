@@ -38,12 +38,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/posts/1/comments",
-					"protocol": "https",
+					"raw": "{{baseURL}}/posts/1/comments",
 					"host": [
-						"jsonplaceholder",
-						"typicode",
-						"com"
+						"{{baseURL}}"
 					],
 					"path": [
 						"posts",
@@ -82,12 +79,9 @@
 					"raw": "{\r\n    \"title:\": \"foo\",\r\n    \"body\": \"bar\",\r\n    \"userId\": {{getVar}}\r\n}"
 				},
 				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/posts",
-					"protocol": "https",
+					"raw": "{{baseURL}}/posts",
 					"host": [
-						"jsonplaceholder",
-						"typicode",
-						"com"
+						"{{baseURL}}"
 					],
 					"path": [
 						"posts"
@@ -97,9 +91,33 @@
 			"response": []
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "getVar",
+			"value": ""
+		},
+		{
+			"key": "baseURL",
 			"value": ""
 		}
 	]
