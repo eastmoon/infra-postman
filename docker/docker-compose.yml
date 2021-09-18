@@ -9,9 +9,11 @@ services:
     container_name: docker-postman_${TAG}
     command:
       run jsonplaceholder.postman_collection.json
-      -r html,cli
-      --reporter-html-export /reports/Restful_Booker_Test_Run.html
+      -r html,json,json-summary,cli
+      --reporter-html-export /reports/report.html
       --reporter-html-template /templates/customTemplate.hbs
+      --reporter-summary-json-export /reports/report-summary.json
+      --reporter-json-export /reports/report.json
     volumes:
       - ../test:/etc/newman
       - ../reports:/reports
