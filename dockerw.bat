@@ -117,6 +117,7 @@ goto end
     echo Command:
     echo      start             Start service with docker compose.
     echo      down              Stop service with docker compose.
+    echo      log               Show logs with container.
     echo.
     echo Run 'cli [COMMAND] --help' for more information on a command.
     goto end
@@ -165,6 +166,24 @@ goto end
 )
 
 :cli-down-help (
+    echo Close docker container instance by docker-compose.
+    goto end
+)
+
+:: ------------------- Command "log" mathod -------------------
+
+:cli-log (
+    @rem Close docker container instance by docker-compose
+    docker logs -f docker-postman_%PROJECT_NAME%
+
+    goto end
+)
+
+:cli-log-args (
+    goto end
+)
+
+:cli-log-help (
     echo Close docker container instance by docker-compose.
     goto end
 )
